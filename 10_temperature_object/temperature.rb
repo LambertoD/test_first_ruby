@@ -52,4 +52,23 @@ class Celsius < Temperature
   def initialize(number)
     @temp = number
   end
+  def in_celsius
+    @temp
+  end
+  def in_fahrenheit
+    @temp * 1.8 + 32
+  end
+end
+class Fahrenheit < Temperature
+  attr_accessor :temp
+  def initialize(number)
+    @temp = number
+  end
+  def in_fahrenheit
+    @temp
+  end
+  def in_celsius
+    ((@temp - 32) / 1.8).ceil
+    
+  end
 end
