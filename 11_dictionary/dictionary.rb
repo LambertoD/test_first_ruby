@@ -11,7 +11,7 @@ class Dictionary
     end
   end
   def keywords
-    @entries.keys
+    @entries.keys.sort
   end
   def include?(key)
     @entries.has_key?(key)
@@ -20,14 +20,16 @@ class Dictionary
     if @entries.empty?
       {}
     elsif include?(value)
-      puts "got elsif  with #{value} and #{@entries}"
       @entries
     else
-      puts "got else  with #{value} and #{@entries}"
-      stuff = @entries.find_all {|key,value| key.start_with? value}
-      puts stuff
-      stuff
+      @entries.select {|h| h.start_with? value}
     end
   end
-
+  def printable
+    hash_to_string = ""
+    @entries.each do |key,value|
+      hash_to_string << "[#{key}] \"#{value}\"\n"
+    end
+    hash_to_string
+  end
 end
