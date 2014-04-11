@@ -6,7 +6,6 @@ class RPNCalculator
   end
   def push(number)
     @contents.push(number) 
-    # @value = number
   end
   def plus
     first_value, second_value = get_input_values_for_expression
@@ -35,10 +34,8 @@ class RPNCalculator
     }.flatten
   end
   def evaluate(string_expression)
-    expression = tokens(string_expression)
-    sub_expression_result = 0
     prev_element = nil
-    expression.each do |element|
+    tokens(string_expression).each do |element|
       if prev_element.is_a? Symbol
         @contents.push(@value)
       end
@@ -60,7 +57,6 @@ class RPNCalculator
     second_value = @contents.pop
     if @contents.empty?
       first_value = @value
-      # @contents = @value
     else
       first_value = @contents.pop
     end
@@ -77,7 +73,7 @@ class RPNCalculator
     when :/
       :divide
     else 
-      "error operator"
+      raise "invalid entry for mathematical operation"
     end
   end
 end
