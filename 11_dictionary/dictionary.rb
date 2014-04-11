@@ -26,10 +26,10 @@ class Dictionary
     end
   end
   def printable
-    hash_to_string = ""
+    hash_to_string = Array.new
     @entries.each do |key,value|
-      hash_to_string << "[#{key}] \"#{value}\"\n"
+      hash_to_string << "[#{key}] \"#{value}\""
     end
-    hash_to_string
+    hash_to_string.sort.join("\n")
   end
 end
