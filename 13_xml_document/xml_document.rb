@@ -1,7 +1,7 @@
 class XmlDocument
   def hello(*args, &block)
     if block_given?
-      parse_with_begin_and_end_tags(block)
+      parse_with_begin_and_end_tags(&block)
     else
       parse_single_tag(*args)
     end
@@ -23,8 +23,12 @@ class XmlDocument
     end
     "<hello#{attribute}/>"
   end
-  def parse_with_begin_and_end_tags(block)
-    nested_block = block
-    "<hello>" + block.call + "</hello>"
+  def parse_with_begin_and_end_tags(&block)
+    "<hello>" + yield + "</hello>"
+    # "<hello>" + more_blocks(block) + "</hello>"
+
+  end
+  def more_blocks(block)
+    self.hello(block)
   end
 end
