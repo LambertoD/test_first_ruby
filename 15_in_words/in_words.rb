@@ -75,14 +75,21 @@ class Fixnum
     thousand = number%1000000
     million_string = extract_digits(million) + " million"
     thousand_string = ""
-    thousand_string = get_thousand_digits(thousand) if thousand > 0
+    if thousand > 999
+      thousand_string = " " + get_thousand_digits(thousand) 
+    else
+      thousand_string = get_thousand_digits(thousand)
+    end
+    
     million_string + thousand_string
   end
   def get_billions_digits(number)
     billion = number/1000000000
     million = number%1000000000
-    puts "billion is #{billion} million is #{million}"
-    
+    billion_string = extract_digits(billion) + " billion"
+    million_string = ""
+    million_string = " " + get_millions_digits(million) if billion > 0
+    billion_string + million_string
   end
 end
 
